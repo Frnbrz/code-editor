@@ -9,10 +9,10 @@ export const LANGUAGES = {
 }
 
 export const CODE_SNIPPETS = {
-  javascript: `\nfunction greet(name) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Alex");\n`,
-  typescript: `\nfunction greet(name: string) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Alex");\n`,
-  python: `\ndef greet(name):\n\tprint("Hello, " + name + "!")\n\ngreet("Alex")\n`,
-  java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello World");\n\t}\n}\n`,
-  go: `\npackage main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("Hello, World!")\n}\n`,
-  rust: `\nfn main() {\n\tprintln!("Hello, World!");\n}\n`
+  javascript: `\nfunction greet(name) {\n\tconsole.log("¡" + "Hola, " + name + "!");\n}\n\ngreet("Fran");\n`,
+  typescript: `\nfunction greet(name: string): void {\n\tconsole.log("¡" + "Hola, " + name + "!");\n}\n\ngreet("Fran");\n`,
+  python: `\ndef greet(name):\n\tprint("¡Hola, " + name + "!")\n\ngreet("Fran")\n`,
+  java: `\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("¡Hola, Mundo!");\n\t}\n}\n`,
+  go: `\npackage main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("¡Hola, Mundo!")\n}\n`,
+  rust: `\nfn main() {\n\tprintln!("¡Hola, Mundo!");\n}\n`
 }
