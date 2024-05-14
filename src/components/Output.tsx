@@ -1,4 +1,7 @@
+
 import { Box, Button, Text } from '@chakra-ui/react'
+import { useState } from 'react'
+import { executeCode } from '../services/api'
 
 interface OutputProps {
   editorRef: React.MutableRefObject<IEditor | null>
@@ -10,26 +13,28 @@ interface IEditor {
   getValue: () => string | undefined
 }
 
-function Output({ editorRef, language, setLanguage }: OutputProps) {
+function Output({ editorRef, language }: OutputProps) {
+
+  const [output, setOutput] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
   async function runCode() {
     const sourceCode = editorRef.current?.getValue()
     if (!sourceCode) return
 
     try {
-      const response = await fetch('http://localhost:3001/run', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ sourceCode, language })
-      })
-      const data = await response.json()
-      console.log(data)
+      setIsLoading(true)
+      const { run: result } = await executeCode(sourceCode, language)
+      setOutput(result.output)
     } catch (error) {
       console.error(error)
+    } finally {
+      setIsLoading(false)
     }
 
   }
+
+
   return (
     <Box
       w="50%"
@@ -38,6 +43,8 @@ function Output({ editorRef, language, setLanguage }: OutputProps) {
         Output
       </Text>
       <Button variant='outline' colorScheme='green' mb='4'
+        onClick={runCode}
+        isLoading={isLoading}
       >
         Run Code
       </Button>
@@ -49,7 +56,10 @@ function Output({ editorRef, language, setLanguage }: OutputProps) {
         borderRadius={4}
         borderColor='#333'
       >
-        test
+        {output
+          ? output
+          : 'Output will be displayed here'
+        }
       </Box>
     </Box>
   )
