@@ -1,14 +1,19 @@
 import axios from 'axios'
+import { LANGUAGES } from '../data/languages.data'
 
 const API = axios.create({
-  baseURL: 'https://api.example.com'
+  baseURL: 'https://emkc.org/api/v2/piston',
 })
 
-export async function runCode(sourceCode: string, language: string) {
-  try {
-    const response = await API.post('/run', { sourceCode, language })
-    return response.data
-  } catch (error) {
-    console.error(error)
-  }
+export async function executeCode(sourceCode: string, language: string) {
+  const response = await API.post('/execute', {
+    language,
+    version: LANGUAGES[language as keyof typeof LANGUAGES],
+    files: [
+      {
+        content: sourceCode,
+      },
+    ],
+  })
+  return response.data
 }
